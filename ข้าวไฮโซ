@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ข้าวไฮโซ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .vote-option {
+            margin: 20px 0;
+        }
+        .vote-option button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>เมนูอาหาร
+    </h1>
+
+    <div class="vote-option">
+        <p>แกงกะหรี่ 1: <span id="vote1">0</span> โหวต</p>
+        <button onclick="vote('option1')">โหวตตัวเลือกที่ 1</button>
+        <a href="https://www.example.com"><button>ข้อมูลอาหาร</button></a>
+    </div>
+
+    <div class="vote-option">
+        <p>ไก่ทอด 2: <span id="vote2">0</span> โหวต</p>
+        <button onclick="vote('option2')">โหวตตัวเลือกที่ 2</button>
+        <a href="https://www.example.com"><button>ข้อมูลอาหาร</button></a>
+    </div>
+
+    <script>
+        // โหลดค่าโหวตจาก Local Storage ถ้ามี
+        let votes = {
+            option1: localStorage.getItem('option1') ? parseInt(localStorage.getItem('option1')) : 0,
+            option2: localStorage.getItem('option2') ? parseInt(localStorage.getItem('option2')) : 0,
+        };
+
+        // แสดงค่าโหวตเมื่อโหลดหน้าเว็บ
+        document.getElementById('vote1').textContent = votes.option1;
+        document.getElementById('vote2').textContent = votes.option2;
+
+        function vote(option) {
+            // เพิ่มคะแนนโหวตให้กับตัวเลือกที่ถูกกด
+            votes[option]++;
+            // อัปเดต Local Storage
+            localStorage.setItem(option, votes[option]);
+            // อัปเดตค่าที่แสดงในหน้าเว็บ
+            document.getElementById('vote1').textContent = votes.option1;
+            document.getElementById('vote2').textContent = votes.option2;
+        }
+    </script>
+
+</body>
+</html>
